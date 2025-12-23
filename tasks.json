@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "BUILD AND RUN",
+            "type": "shell",
+            "command": "cmd.exe",
+            "args": [
+                "/C",
+                "cls && gcc main.c FungsiPendukung/helpers.c FungsiPendukung/helperLaporan.c Program/fungsiProgram.c Program/laporanHarian.c Program/laporanBulanan.c Tampilan/display.c -o Build\\CUAN.exe && Build\\CUAN.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "clear": true
+            }
+        }
+    ]
+}

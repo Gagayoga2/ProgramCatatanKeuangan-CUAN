@@ -1,3 +1,6 @@
 ID|Nama User|Password
-1|Bruno Matos|Bruno123
-2|Yoga Irgi|Yog123
+1|Laura Miller|Laura333
+2|Simon Miller|Simon333
+3|John Smith|John045
+4|Sarah Davis|Sarah555
+5|Emannuel Aqi|Eman476
