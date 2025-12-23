@@ -1,0 +1,20 @@
+========================== [LAPORAN HARIAN] ==============================
+Pengguna : Bruno Matos | Tanggal : 22-12-2025
+==========================================================================
+
+--------------------------------------------------------------------------
+ID  | Kategori             | Deskripsi                      |   Jumlah
+--------------------------------------------------------------------------
+5   | Makanan              | Beli Makanan Nasi Geprek       | Rp.15000.00
+6   | Transportasi         | Beli Bensi 20K                 | Rp.20000.00
+--------------------------------------------------------------------------
+Total Pengeluaran Hari Ini : Rp.70000.00
+Kategori Terbesar          : Transportasi (Rp.20000.00)
+
+Analisis:
+- Pemasukan Bulan 12-2025  : Rp.500000.00
+- Jumlah Hari Bulan        : 31 Hari
+- Batas Harian             : Rp.16129.03
+- Status                   : BOROS (pengeluaran Rp.70000.00 > batas Rp.16129.03)
+==========================================================================
+
