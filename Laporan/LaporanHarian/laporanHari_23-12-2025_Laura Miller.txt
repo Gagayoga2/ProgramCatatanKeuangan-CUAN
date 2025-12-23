@@ -1,0 +1,21 @@
+========================== [LAPORAN HARIAN] ==============================
+Pengguna : Laura Miller | Tanggal : 23-12-2025
+==========================================================================
+
+--------------------------------------------------------------------------
+NO  | Kategori             | Deskripsi                      | Jumlah      
+--------------------------------------------------------------------------
+1   | Makanan              | Beli Sarapan Nasi Goreng       | Rp.10000.00
+2   | Transportasi         | Goj*K ke Pasar Legi            | Rp. 8500.00
+3   | Lain-Lain            | Bayar Token Listrik            | Rp.25000.00
+--------------------------------------------------------------------------
+Total Pengeluaran Hari Ini : Rp.43500.00
+Kategori Terbesar          : Lain-Lain (Rp.25000.00)
+
+Analisis:
+- Pemasukan Bulan 12-2025  : Rp.1500000.00
+- Jumlah Hari Bulan        : 31 Hari
+- Batas Harian             : Rp.48387.10
+- Status                   : BAGUS, PENGELUARAN HARI INI ANDA HEMAT
+==========================================================================
+

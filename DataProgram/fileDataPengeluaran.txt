@@ -1,16 +1,11 @@
 ID|Tanggal|Kategori|Deskripsi|Jumlah|IDUser
-1|15-12-2025|Makanan|Sarapan Nasi Uduk|15000.00|1
-2|16-12-2025|Transportasi|Beli Bensin|20000.00|1
-3|17-12-2025|Belanja|Beli Pulsa|25000.00|1
-4|18-12-2025|Makanan|Makan Siang|20000.00|1
-5|19-12-2025|Hiburan|Nonton Bioskop|50000.00|1
-6|20-12-2025|Belanja|Beli Kaos|40000.00|1
-7|21-12-2025|Makanan|Makan Di Kantin|12000.00|1
-8|21-12-2025|Minuman|Beli Esteh|3000.00|1
-9|21-12-2025|Makanan|Beli Siomay|5000.00|1
-10|21-12-2025|Makanan|Batagor|5000.00|1
-11|22-12-2025|Makanan|Nasi Geprek|15000.00|1
-12|22-12-2025|Transportasi|Beli Bensin 20K|20000.00|1
-13|23-12-2025|Makanan|Nasi Goreng|10000.00|1
-14|23-12-2025|Belanja|CheckOut Topi|20000.00|1
-15|23-12-2025|Transportasi|Pergi ke Pasar|5000.00|1
+1|23-12-2025|Makanan|Beli Sarapan Nasi Goreng|10000.00|1
+2|23-12-2025|Transportasi|Goj*K ke Pasar Legi|8500.00|1
+3|23-12-2025|Lain-Lain|Bayar Token Listrik|25000.00|1
+4|22-12-2025|Lain-Lain|Bayar Pulsa|10000.00|1
+5|22-12-2025|Transportasi|Gr*b ke Perpustakaan Solo|12000.00|1
+6|22-12-2025|Makanan|Makan Siang di HIK|7000.00|1
+7|21-12-2025|Transportasi|Gr*b ke Pasar Jongke|12000.00|1
+8|21-12-2025|Perabotan|Beli Ember|9000.00|1
+9|20-12-2025|Service|Bayar Service Charger Laptop|30000.00|1
+10|20-12-2025|Kebutuhan Poko|Beli Beras 1 KG|14000.00|1
