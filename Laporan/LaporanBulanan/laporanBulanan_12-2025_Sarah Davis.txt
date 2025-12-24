@@ -1,0 +1,34 @@
+================================== [LAPORAN BULANAN] ====================================
+Pengguna : Sarah Davis | Tanggal : 24-12-2025
+=========================================================================================
+
+-----------------------------------------------------------------------------------------
+NO  | Tanggal     | Kategori             | Deskripsi                      | Jumlah      
+-----------------------------------------------------------------------------------------
+1   | 24-12-2025  | Lain-Lain            | Bayar Token Listrik Desember   | Rp. 75000.00
+2   | 24-12-2025  | Service              | Service Charger Laptop         | Rp. 35000.00
+3   | 24-12-2025  | Makanan              | Makan Siang Nasi Pada Telor    | Rp. 10000.00
+-----------------------------------------------------------------------------------------
+Total Pengeluaran Bulan Ini       : Rp.120000.00
+Kategori Terbesar                 : Lain-Lain (Rp.75000.00)
+Hari Terboros                     : 24-12-2025 (Rp.120000.00)
+Minggu Terboros                   : Minggu ke-4 (Rp.120000.00)
+
+Analisis Bulanan:
+- Pemasukan Bulan 12-2025         : Rp.2500000.00
+- Jumlah Hari Bulan               : 31 Hari
+- Rata-rata Pengeluaran Harian    : Rp.3870.97
+- Rata-rata Pengeluaran Mingguan  : Rp.30000.00
+- Hari Boros vs Hemat             : 1 boros 0 hemat
+- Hari Tanpa Pengeluaran          : 30 Hari
+- Hari Dengan Transaksi Terbanyak : 24-12-2025 (3 transaksi)
+
+Distribusi Kategori:
+- Lain-Lain : Rp.75000.00 (62.50%)
+- Service : Rp.35000.00 (29.17%)
+- Makanan : Rp.10000.00 (8.33%)
+- Sisa Saldo Bulain 12-2025       : Rp.2380000.00
+=========================================================================================
+Pengeluaran bulan ini terkendali sesuai rencana. Ini menunjukkan disiplin finansial yang konsisten.
+=========================================================================================
+

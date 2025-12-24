@@ -43,8 +43,8 @@ void halamanBeranda(double uang, double saldo, char tanggal[20]){
 void halamanLogin(){
     resetInputScreen();
     printf("======================= [LOGIN] =========================\n");
-    inputString("Masukan Username : ", user.namaUser, sizeof(user.namaUser));
-    inputString("Masukan Password : ", user.password, sizeof(user.password));
+    inputString("Masukan Username : ", User.namaUser, sizeof(User.namaUser));
+    inputString("Masukan Password : ", User.password, sizeof(User.password));
     loginUser();
 }
 
@@ -53,16 +53,16 @@ void halamanRegister(){
     resetInputScreen();
     char confirmPass[50];
     printf("===================== [REGISTER] ========================\n");
-    inputString("Masukan Username : ", user.namaUser, sizeof(user.namaUser));
+    inputString("Masukan Username : ", User.namaUser, sizeof(User.namaUser));
+    inputString("Masukan Password : ", User.password, sizeof(User.password));
 
     do {
-        inputString("Masukan Password : ", user.password, sizeof(user.password));
         inputString("Konfirmasi Password : ", confirmPass, sizeof(confirmPass));
 
-        if (strcmp(user.password, confirmPass) != 0) {
-            printf("\033[31m[x] Password tidak sama, silakan ulangi!\033[0m\n");
+        if (strcmp(User.password, confirmPass) != 0) {
+            alert(ALERT_ERROR, "Password tidak sama, silakan ulangi!");
         }
-    } while (strcmp(user.password, confirmPass) != 0);
+    } while (strcmp(User.password, confirmPass) != 0);
     registerUser();
 }
 
@@ -70,18 +70,18 @@ void halamanRegister(){
 void halamanPemasukan(){
     resetInputScreen();
     printf("===================== [PEMASUKAN] =======================\n");
-    printf("# MENU PENCATATAN PEMASUKAN %d\n%s", user.IDUser, LINEDASH);
+    printf("# MENU PENCATATAN PEMASUKAN %d\n%s", getIDUser(), LINEDASH);
     inputInt("Masukan Tahun    : ", &pemasukan.tahun);
     inputInt("Masukan Bulan    : ", &pemasukan.bulan);
     inputDouble("Jumlah Pemasukan : ", &pemasukan.jumlah);
-    pemasukan.IDUser = user.IDUser;
-    setMenuPemasukan();
+    pemasukan.IDUser = getIDUser();
+    setMenuPemasukan(getIDUser());
 }
 
 // Tampilan Halaman Pengeluaran
 void halamanPengeluaran(){
     resetInputScreen();
-    pengeluaran = (pengeluaranHarian*) malloc(sizeof(pengeluaranHarian));
+    pengeluaran = (PengeluaranHarian*) malloc(sizeof(PengeluaranHarian));
 
     // Alokasi string dinamis
     pengeluaran->tanggal   = (char*) malloc(20);
@@ -89,7 +89,7 @@ void halamanPengeluaran(){
     pengeluaran->deskripsi = (char*) malloc(100);
     strcpy(pengeluaran->tanggal, getTanggal());
 
-    printf("===================== [PENGELUARAN] =======================\n\n");
+    printf("==================== [PENGELUARAN] ======================\n\n");
     printf("Tanggal    : %s\n", pengeluaran->tanggal);
     inputString("Kategori   : ", pengeluaran->kategori, 50);
     inputString("Deskripsi  : ", pengeluaran->deskripsi, 100);

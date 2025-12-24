@@ -23,6 +23,8 @@
 #define TAGLINEENTER   "               Tekan ENTER untuk melanjutkan             \n"
 #define TAGLINEUTAMA   "           \"Keuangan rapi, hidup lebih pasti\"          \n"
 #define TAGLINEBERANDA "     \"Catat setiap rupiah, wujudkan setiap impian\"     \n"
+#define HEMAT          "Pengeluaran bulan ini terkendali sesuai rencana. Ini menunjukkan disiplin finansial yang konsisten."
+#define BOROS          "Perhatian: pengeluaran bulan ini melebihi batas yang ditetapkan. Perlu evaluasi dan penyesuaian."
 
 // Konstanta Nama FILE
 #define FILEUSER        "DataProgram/fileDataUser.txt"

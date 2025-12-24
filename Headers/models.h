@@ -6,31 +6,31 @@ struct{
     int IDUser;
     char namaUser[255];
     char password[50];
-}user;
+}User;
 
-/* ================================= STRUCT PEMASUKAN DAN PENGELUARAN =================================*/
+/* ============ STRUCT PEMASUKAN DAN PENGELUARAN ============*/
 // Struct Pemasukan dan Pengeluaran
-typedef struct {
+typedef struct{
     int bulan;
     int tahun;
     double jumlah;
     int IDUser;
-} pemasukanBulanan;
+}PemasukanBulanan;
 
-typedef struct {
+typedef struct{
     char *tanggal;
     char *kategori;
     char *deskripsi;
     double jumlah;
-} pengeluaranHarian;
+}PengeluaranHarian;
 
-/* =========================================== STRUCT LAPORAN ================================================*/
+/* =================== STRUCT LAPORAN ===================*/
 // Struct Data Ringkasan
 typedef struct{ 
     double pengeluaranHariIni; 
     double pemasukanBulanan; 
     double saldoHariIni; 
-} DataRingkasan;
+}DataRingkasan;
 
 // Struct Ringkasan & Analisis Harian Untuk Laporan Harian
 typedef struct{
@@ -38,18 +38,20 @@ typedef struct{
     double maxJumlah;
     char kategoriMax[100];
     int adaData;
-} RingkasanHarian;
-typedef struct {
+    int jumlahTransaksi; 
+    double persenKategoriMax;
+}RingkasanHarian;
+typedef struct{
     int bulan;
     int tahun;
     int jumlahHariBulan;
     double pemasukanBulanan;
     double batasHarian;
     double sisaSaldo;
-} AnalisisLaporan;
+}AnalisisLaporan;
 
 // Struct Ringkasana Bulanana Untuk Laporan Bulanan
-typedef struct {
+typedef struct{
     double totalBulanan;
     double maxKategoriJumlah;
     char kategoriMax[100];
@@ -66,34 +68,39 @@ typedef struct {
     double maxMingguJumlah;
     int transaksiTerbanyak;
     char tanggalTransaksiMax[20];
-    double marginBulanan;
-} RingkasanBulanan;
+    double rataRataMingguan;
 
-/* ===================================================== STRUCT ENUM ALERT & MENU =================================================*/
+    // Distribusi Kategori
+    int jumlahKategori; 
+    char namaKategori[50][100]; 
+    double totalKategori[50];
+}RingkasanBulanan;
+
+/* =================== ENUM ALERT & MENU ===================*/
 // ENUM Alert
-typedef enum {
+typedef enum{
     ALERT_SUCCESS,
     ALERT_ERROR,
     ALERT_WARNING,
     ALERT_INFO,
     ALERT_DEFAULT
-} AlertType;
+}AlertType;
 
 // Enum Menu Beranda
-typedef enum {
+typedef enum{
     MENU_PEMASUKAN = 1,
     MENU_PENGELUARAN,
     MENU_LAPORAN_HARIAN,
     MENU_LAPORAN_BULANAN,
     MENU_LOGOUT
-} MenuBeranda;
+}MenuBeranda;
 
 // Definisi enum
-typedef enum {
+typedef enum{
     MENU_LOGIN = 1,
     MENU_REGISTER,
     MENU_TENTANG,
     MENU_LEFT
-} MenuUtama;
+}MenuUtama;
 
 #endif

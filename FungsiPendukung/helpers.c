@@ -14,14 +14,14 @@ void resetInputScreen(){
 }
 
 // Fungsi Untuk Inputan String
-void inputString(const char *label, char *buffer, int size) {
+void inputString(const char *label, char *buffer, int size){
     printf("%s", label);
     fgets(buffer, size, stdin);
     buffer[strcspn(buffer, "\n")] = '\0';
 }
 
 // Fungsi Untuk Inputan integer
-void inputInt(const char *label, int *value) {
+void inputInt(const char *label, int *value){
     char buffer[50];
     printf("%s", label);
     fgets(buffer, sizeof(buffer), stdin);
@@ -29,7 +29,7 @@ void inputInt(const char *label, int *value) {
 }
 
 // Fungsi Untuk Inputan Double
-void inputDouble(const char *label, double *value) {
+void inputDouble(const char *label, double *value){
     char buffer[50];
     printf("%s", label);
     fgets(buffer, sizeof(buffer), stdin);
@@ -37,9 +37,9 @@ void inputDouble(const char *label, double *value) {
 }
 
 // Fungsi Untuk Alert
-void alert(AlertType type, const char *message) {
+void alert(AlertType type, const char *message){
     printf(LINEDASH);
-    switch (type){
+    switch(type){
     case ALERT_SUCCESS: printf("%s%s[$] %s%s\n", BOLD, GREEN, message, RESET); break;
     case ALERT_ERROR: printf("%s%s[x] %s%s\n", BOLD, RED, message, RESET); break;
     case ALERT_WARNING: printf("%s%s[!] %s%s\n", BOLD, YELLOW, message, RESET);; break;
@@ -51,15 +51,15 @@ void alert(AlertType type, const char *message) {
 }
 
 // Fungsi Untuk Get ID Terakhir
-int getLastID(const char *filename, const char *format, int fieldCount) {
+int getLastID(const char *filename, const char *format, int fieldCount){
     fp = fopen(filename, "r");
-    if (fp == NULL) return 0;
+    if(fp == NULL) return 0;
 
     int lastID = 0;
     char line[512];
     fgets(line, sizeof(line), fp);
 
-    while (fgets(line, sizeof(line), fp)) {
+    while(fgets(line, sizeof(line), fp)){
         int id;
         char buf1[128], buf2[128], buf3[256];
         int i1, i2;
@@ -67,7 +67,7 @@ int getLastID(const char *filename, const char *format, int fieldCount) {
 
         // parsing sesuai format yang dikirim
         int matched = sscanf(line, format, &id, buf1, buf2, buf3, &d1, &i1, &i2);
-        if (matched == fieldCount) {
+        if(matched == fieldCount){
             lastID = id;
         }
     }
@@ -86,13 +86,14 @@ char* getTanggal() {
 }
 
 // Fungsi Untuk Jumlah Hari Bulan
-bool cekTahunKabisat(int tahun) {
+bool cekTahunKabisat(int tahun){
     return (tahun % 400 == 0) || (tahun % 4 == 0 && tahun % 100 != 0);
 }
-int getJumlahHari(int bulan, int tahun) {
+
+int getJumlahHari(int bulan, int tahun){
     int hariPerBulan[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    if (bulan == 2 && cekTahunKabisat(tahun)) {
+    if(bulan == 2 && cekTahunKabisat(tahun)){
         return 29;
     } return hariPerBulan[bulan - 1];
 }
@@ -113,48 +114,42 @@ DataRingkasan getDataRingkasan(int IDUser){
 }
 
 // Fungsi Untuk Mengambik Pemasukan Bulanan
-double getPemasukanBulanan(const char *filename, int bulan, int tahun, int IDUser) {
+double getPemasukanBulanan(const char *filename, int bulan, int tahun, int IDUser){
     fp = fopen(filename, "r");
-    if (fp == NULL) return 0;
+    if(fp == NULL) return 0;
 
     int id, b, t, idUser;
     double jumlah, total = 0;
 
     char header[256];
     fgets(header, sizeof(header), fp);
-
-    while (fscanf(fp, "%d|%d|%d|%lf|%d\n", &id, &b, &t, &jumlah, &idUser) == 5) {
-        if (b == bulan && t == tahun && idUser == IDUser) {
+    while(fscanf(fp, "%d|%d|%d|%lf|%d\n", &id, &b, &t, &jumlah, &idUser) == 5){
+        if(b == bulan && t == tahun && idUser == IDUser){
             total += jumlah;
         }
-    }
-
-    fclose(fp);
+    }fclose(fp);
     return total;
 }
 
 // Fungsi Untuk Mengambil Data Pengeluaran Hari Ini
-double getPengeluaranHariIni(const char *filename, const char *tanggalHariIni, int IDUser) {
+double getPengeluaranHariIni(const char *filename, const char *tanggalHariIni, int IDUser){
     fp = fopen(filename, "r");
-    if (fp == NULL) return 0;
+    if(fp == NULL) return 0;
 
     int id, userID;
     double jumlah, total = 0;
     char tanggal[20], kategori[100], deskripsi[255], headerFile[255];
     fgets(headerFile, sizeof(headerFile), fp);
-
-    while (fscanf(fp, "%d|%19[^|]|%99[^|]|%254[^|]|%lf|%d\n",&id, tanggal, kategori, deskripsi, &jumlah, &userID) == 6) {
-        if (strcmp(tanggal, tanggalHariIni) == 0 && userID == IDUser) {
+    while(fscanf(fp, "%d|%19[^|]|%99[^|]|%254[^|]|%lf|%d\n",&id, tanggal, kategori, deskripsi, &jumlah, &userID) == 6){
+        if(strcmp(tanggal, tanggalHariIni) == 0 && userID == IDUser){
             total += jumlah;
         }
-    }
-
-    fclose(fp);
+    }fclose(fp);
     return total;
 }
 
 // Fungsi Untuk Mengambil Datat Total Pengeluaran
-double getTotalPengeluaran(int bulan, int tahun, int IDUser) {
+double getTotalPengeluaran(int bulan, int tahun, int IDUser){
     double jumlah, totalPengeluaran = 0;
     char tanggal[20], kategori[100], deskripsi[255], headerFile[255];
     int id, idUser;
@@ -163,32 +158,36 @@ double getTotalPengeluaran(int bulan, int tahun, int IDUser) {
     time_t t = time(NULL);
     tm_info = *localtime(&t);
 
-    cekFile(FILEPENGELUARAN, "r");
+    fp = cekFile(FILEPENGELUARAN, "r");
     fgets(headerFile, sizeof(headerFile), fp);
-
-    while (fscanf(fp, "%d|%19[^|]|%99[^|]|%254[^|]|%lf|%d\n", &id, tanggal, kategori, deskripsi, &jumlah, &idUser) == 6) {
+    while(fscanf(fp, "%d|%19[^|]|%99[^|]|%254[^|]|%lf|%d\n", &id, tanggal, kategori, deskripsi, &jumlah, &idUser) == 6){
         int d, m, y;
         sscanf(tanggal, "%d-%d-%d", &d, &m, &y);
 
-        if (m == bulan && y == tahun && idUser == IDUser) {
+        if(m == bulan && y == tahun && idUser == IDUser){
             // hanya pengeluaran sampai hari ini
             if (d <= tm_info.tm_mday) {
                 totalPengeluaran += jumlah;
             }
         }
-    }
-    fclose(fp);
-
+    }fclose(fp);
     return totalPengeluaran;
 }
 
 // Fungsi Buka File
-void cekFile(const char *namaFile, const char *mode){
+FILE* cekFile(const char *namaFile, const char *mode){
     fp = fopen(namaFile, mode);
-    if (fp == NULL){
+    if(fp == NULL){
         alert(ALERT_ERROR, "Tidak bisa membuka file!");
-        return;
+        return NULL;
     }
+    return fp;
+}
+
+// Fungsi Ambil ID User
+int getIDUser(){
+    int ID = User.IDUser;
+    return ID;
 }
 
 // Fungsi Kembali Halaman Beranda
@@ -204,12 +203,19 @@ void kembaliUtama(){
 }
 
 // Fungsi Untuk Logput
-void logoutUser() {
-    user.IDUser = -1;
-    strcpy(user.namaUser, "");
-    strcpy(user.password, "");
+void logoutUser(){
+    User.IDUser = -1;
+    strcpy(User.namaUser, "");
+    strcpy(User.password, "");
     system(CLEAR_CMD);
     alert(ALERT_INFO, "Anda telah logout. Silakan login kembali untuk mengakses program!");
     getchar();
     kembaliUtama();
+}
+
+// Fungsi Keluar Program
+void keluarProgram(){
+    system(CLEAR_CMD);
+    alert(ALERT_INFO, "TERIMA KASIH TELAH MENGGUNAKAN PROGRAM CUAN");
+    return;
 }
