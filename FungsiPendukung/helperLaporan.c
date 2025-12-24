@@ -9,15 +9,22 @@ RingkasanHarian getRingkasanHarian(const char *tanggalHariIni, int IDUser, FILE 
     double jumlah;
     cekFile(FILEPENGELUARAN, "r");
     fgets(headerFile, sizeof(headerFile), fp);
-    while (fscanf(fp, "%d|%19[^|]|%99[^|]|%254[^|]|%lf|%d\n", &id, tanggal, kategori, deskripsi, &jumlah, &idUser) == 6){
+    while(fscanf(fp, "%d|%19[^|]|%99[^|]|%254[^|]|%lf|%d\n", &id, tanggal, kategori, deskripsi, &jumlah, &idUser) == 6){
         if (strcmp(tanggal, tanggalHariIni) == 0 && idUser == IDUser){
             ringkasan.adaData = 1;
             ringkasan.total += jumlah;
-            if (jumlah > ringkasan.maxJumlah){
+            // Hitung Transaksi
+            ringkasan.jumlahTransaksi++;
+            if(jumlah > ringkasan.maxJumlah){
+                ringkasan.maxJumlah = jumlah; 
+                strcpy(ringkasan.kategoriMax, kategori); 
+            }
+
+            if(jumlah > ringkasan.maxJumlah){
                 ringkasan.maxJumlah = jumlah;
                 strcpy(ringkasan.kategoriMax, kategori);
             }
-            if (toFile){
+            if(toFile){
                 fprintf(out, "%-3d | %-20s | %-30s | Rp.%8.2f\n", counter, kategori, deskripsi, jumlah);
             }else{
                 printf("%-3d | %-20s | %-30s | Rp.%8.2f\n", counter, kategori, deskripsi, jumlah);
@@ -26,20 +33,23 @@ RingkasanHarian getRingkasanHarian(const char *tanggalHariIni, int IDUser, FILE 
         }
     }
     fclose(fp);
+    if (ringkasan.total > 0){ 
+        ringkasan.persenKategoriMax = (ringkasan.maxJumlah / ringkasan.total) * 100.0; 
+    }
     return ringkasan;
 }
 
 // Fungsi Analisis Harian
-AnalisisLaporan getAnalisisLaporan() {
+AnalisisLaporan getAnalisisLaporan(int IDUser){
     AnalisisLaporan a;
     time_t t = time(NULL);
     tm_info = *localtime(&t);
     a.bulan = tm_info.tm_mon + 1;
     a.tahun = tm_info.tm_year + 1900;
-    a.pemasukanBulanan = getPemasukanBulanan(FILEPEMASUKAN, a.bulan, a.tahun, user.IDUser);
+    a.pemasukanBulanan = getPemasukanBulanan(FILEPEMASUKAN, a.bulan, a.tahun, IDUser);
     a.jumlahHariBulan = getJumlahHari(a.bulan, a.tahun);
     a.batasHarian = a.pemasukanBulanan / a.jumlahHariBulan;
-    a.sisaSaldo = a.pemasukanBulanan - getTotalPengeluaran(a.bulan, a.tahun, user.IDUser);
+    a.sisaSaldo = a.pemasukanBulanan - getTotalPengeluaran(a.bulan, a.tahun, IDUser);
     return a;
 }
 
@@ -48,7 +58,7 @@ AnalisisLaporan getAnalisisLaporan() {
 RingkasanBulanan getRingkasanBulanan(int bulan, int tahun, double batasHarian, int jumlahHariBulan, int IDUser, FILE *out, int toFile) {
     RingkasanBulanan r = {0};
     char headerFile[255];
-    cekFile(FILEPENGELUARAN, "r");
+    fp = cekFile(FILEPENGELUARAN, "r");
     fgets(headerFile, sizeof(headerFile), fp);
 
     int id, idUser, counter = 1, kategoriCount = 0, transaksiHari = 0;
@@ -56,41 +66,40 @@ RingkasanBulanan getRingkasanBulanan(int bulan, int tahun, double batasHarian, i
     char tanggal[20], kategori[100], deskripsi[255];
     char hariSebelumnya[20] = "", namaKategori[50][100];
 
-    while (fscanf(fp, "%d|%19[^|]|%99[^|]|%254[^|]|%lf|%d\n", &id, tanggal, kategori, deskripsi, &jumlah, &idUser) == 6) {
+    while(fscanf(fp, "%d|%19[^|]|%99[^|]|%254[^|]|%lf|%d\n", &id, tanggal, kategori, deskripsi, &jumlah, &idUser) == 6) {
         int d, m, y;
         sscanf(tanggal, "%d-%d-%d", &d, &m, &y);
-        if (m == bulan && y == tahun && idUser == IDUser) {
+        if(m == bulan && y == tahun && idUser == IDUser){
             r.adaData = 1;
             r.totalBulanan += jumlah;
-
-            // kategori terbesar
             int found = 0;
-            for (int i = 0; i < kategoriCount; i++) {
-                if (strcmp(namaKategori[i], kategori) == 0) {
+            // kategori terbesar
+            for(int i = 0; i < kategoriCount; i++){
+                if(strcmp(namaKategori[i], kategori) == 0) {
                     totalKategori[i] += jumlah;
                     found = 1;
                     break;
                 }
             }
-            if (!found) {
+            if(!found){
                 strcpy(namaKategori[kategoriCount], kategori);
                 totalKategori[kategoriCount] = jumlah;
                 kategoriCount++;
             }
 
             // per hari
-            if (strcmp(hariSebelumnya, tanggal) != 0) {
+            if(strcmp(hariSebelumnya, tanggal) != 0){
                 // evaluasi hari sebelumnya
-                if (hariSebelumnya[0] != '\0') {
-                    if (totalHari > batasHarian) r.hariBoros++;
+                if(hariSebelumnya[0] != '\0'){
+                    if(totalHari > batasHarian) r.hariBoros++;
                     else r.hariHemat++;
-                    if (transaksiHari > r.transaksiTerbanyak) {
+                    if(transaksiHari > r.transaksiTerbanyak) {
                         r.transaksiTerbanyak = transaksiHari;
                         strcpy(r.tanggalTransaksiMax, hariSebelumnya);
                     }
-                    if (toFile){
+                    if(toFile){
                         fprintf(out, "--------------------------------%s", LINEDASH);
-                    } else { 
+                    }else{ 
                         printf(BOLD BLUE "--------------------------------%s" RESET, LINEDASH);
                     }
                 }
@@ -98,12 +107,12 @@ RingkasanBulanan getRingkasanBulanan(int bulan, int tahun, double batasHarian, i
                 totalHari = jumlah;
                 transaksiHari = 1;
                 strcpy(hariSebelumnya, tanggal);
-            } else {
+            }else{
                 totalHari += jumlah;
                 transaksiHari++;
             }
 
-            if (totalHari > r.maxHariJumlah) {
+            if(totalHari > r.maxHariJumlah){
                 r.maxHariJumlah = totalHari;
                 strcpy(r.tanggalMax, tanggal);
             }
@@ -112,41 +121,56 @@ RingkasanBulanan getRingkasanBulanan(int bulan, int tahun, double batasHarian, i
             int minggu = (d - 1) / 7;
             totalMinggu[minggu] += jumlah;
 
-            if (toFile){
+            if(toFile){
                 fprintf(out, "%-3d | %-11s | %-20s | %-30s | Rp.%9.2f\n", counter, tanggal, kategori, deskripsi, jumlah);
             }else{
                 printf("%-3d | %-11s | %-20s | %-30s | Rp.%9.2f\n", counter, tanggal, kategori, deskripsi, jumlah);
             }
             counter++;
+
+            // distribusi kategori
+            if(!found){
+                strcpy(r.namaKategori[r.jumlahKategori], kategori);
+                r.totalKategori[r.jumlahKategori] = jumlah;
+                r.jumlahKategori++;
+            }else{
+                for (int i = 0; i < r.jumlahKategori; i++) {
+                    if (strcmp(r.namaKategori[i], kategori) == 0) {
+                        r.totalKategori[i] += jumlah; break;
+                    }
+                }
+            }
         }
-    }
-    fclose(fp);
+    }fclose(fp);
 
     // evaluasi hari terakhir
-    if (hariSebelumnya[0] != '\0') {
-        if (totalHari > batasHarian) r.hariBoros++;
+    if(hariSebelumnya[0] != '\0'){
+        if(totalHari > batasHarian) r.hariBoros++;
         else r.hariHemat++;
-        if (transaksiHari > r.transaksiTerbanyak) {
+        if(transaksiHari > r.transaksiTerbanyak){
             r.transaksiTerbanyak = transaksiHari;
             strcpy(r.tanggalTransaksiMax, hariSebelumnya);
         }
     }
 
     // kategori terbesar
-    for (int i = 0; i < kategoriCount; i++) {
-        if (totalKategori[i] > r.maxKategoriJumlah) {
+    for(int i = 0; i < kategoriCount; i++){
+        if (totalKategori[i] > r.maxKategoriJumlah){
             r.maxKategoriJumlah = totalKategori[i];
             strcpy(r.kategoriMax, namaKategori[i]);
         }
     }
 
     // minggu terboros
-    for (int i = 0; i < 5; i++) {
-        if (totalMinggu[i] > r.maxMingguJumlah) {
+    for(int i = 0; i < 5; i++){
+        if (totalMinggu[i] > r.maxMingguJumlah){
             r.maxMingguJumlah = totalMinggu[i];
             sprintf(r.mingguMax, "Minggu ke-%d", i+1);
         }
     }
+
+    // rata-rata mingguan
+    r.rataRataMingguan = r.totalBulanan / 4.0; // asumsi 4 minggu
 
     // rata-rata harian
     r.rataRataHarian = r.totalBulanan / jumlahHariBulan;

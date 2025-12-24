@@ -1,21 +1,22 @@
 ========================== [LAPORAN HARIAN] ==============================
-Pengguna : Laura Miller | Tanggal : 23-12-2025
+Pengguna : Sarah Davis | Tanggal : 24-12-2025
 ==========================================================================
 
 --------------------------------------------------------------------------
 NO  | Kategori             | Deskripsi                      | Jumlah      
 --------------------------------------------------------------------------
-1   | Makanan              | Beli Sarapan Nasi Goreng       | Rp.10000.00
-2   | Transportasi         | Goj*K ke Pasar Legi            | Rp. 8500.00
-3   | Lain-Lain            | Bayar Token Listrik            | Rp.25000.00
+1   | Lain-Lain            | Bayar Token Listrik Desember   | Rp.75000.00
+2   | Service              | Service Charger Laptop         | Rp.35000.00
+3   | Makanan              | Makan Siang Nasi Pada Telor    | Rp.10000.00
 --------------------------------------------------------------------------
-Total Pengeluaran Hari Ini : Rp.43500.00
-Kategori Terbesar          : Lain-Lain (Rp.25000.00)
+Total Pengeluaran Hari Ini : Rp.120000.00
+Jumlah Transaksi Hari Ini  : 3 Transaksi
+Kategori Terbesar          : Lain-Lain (Rp.75000.00, 62.50%)
 
 Analisis:
-- Pemasukan Bulan 12-2025  : Rp.1500000.00
+- Pemasukan Bulan 12-2025  : Rp.2500000.00
 - Jumlah Hari Bulan        : 31 Hari
-- Batas Harian             : Rp.48387.10
-- Status                   : BAGUS, PENGELUARAN HARI INI ANDA HEMAT
+- Batas Harian             : Rp.80645.16
+- Status                   : PENGELUARAN HARI INI ANDA BOROS!!
 ==========================================================================
 
